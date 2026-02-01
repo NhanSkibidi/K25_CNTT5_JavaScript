@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>5</title>
+</head>
+<body>
+<script>
+    let requests = 0;
+    let success = 0;
+    let reject = 0;
+    let pending = 0;
+    while (true) {
+        let answer = prompt("Co yeu cau dat muon truoc moi khong? (co/ko)").trim().toLowerCase();
+        if (answer==="ko") {
+            break;
+        }
+        if (answer !== "co") {
+            alert("Nhap 'co' hoac 'khong'");
+            continue;
+        }
+        let name = prompt("Ten ban doc:");
+        let bookCode = prompt("Ma sach:");
+        let bookName = prompt("Ten sach:");
+        let waitDays = Number(prompt("So ngay du kien cho:"));
+        let priority = Number(prompt(
+            "Nhap muc uu tien:\n1 - Sinh vien\n2 - Giang vien\n3 - Nhan vien thu vien"));
+        requests++;
+        if (waitDays > 45) {
+            console.log("Tu choi: Thoi gian cho qua 45 ngay");
+            reject++;
+        }
+        else if (priority === 3) {
+            console.log("Dat truoc thanh cong - Uu tien dac cach cao nhat");
+            success++;
+        }
+        else if (priority === 2 && waitDays <= 30) {
+            console.log("Dat truoc thanh cong - Uu tien giang vien");
+            success++;
+        }
+        else if (priority === 1 && waitDays <= 21) {
+            console.log("Dat truoc thanh cong");
+            success++;
+        }
+        else {
+            console.log("Dat truoc tam thoi - Cho xet duyet");
+            pending++;
+        }
+    }
+    console.log("Tong so yeu cau da xu ly: " + requests);
+    console.log("So yeu cau dat truoc thanh cong: " + success);
+    console.log("So yeu cau bi tu choi: " + reject);
+    console.log("So yeu cau cho xet duyet: " + pending);
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let total = Number(prompt("Hôm nay có bao nhiêu lượt trả sách?"));
+let late = 0;
+
+for (let i = 1; i <= total; i++) {
+    console.log("Lượt trả " + i);
+    let person = prompt("Tên người trả:");
+    let book = prompt("Tên sách:");
+    let days;
+    do {
+        days = Number(prompt("Số ngày đã mượn (>= 1):"));
+        if (days < 1) {
+            console.log("Số ngày không hợp lệ, nhập lại!");
+        }
+    } while (days < 1);
+    if (days <= 14) {
+        console.log("Trả đúng hạn");
+    } else if (days <= 21) {
+        console.log("Trả muộn nhẹ");
+        console.log("Phạt nhắc nhở");
+        late++;
+    } else {
+        console.log("Quá hạn nghiêm trọng");
+        console.log("Cần ghi biên bản phạt");
+        late++;
+    }
+}
+console.log("Tổng số lượt trả sách:", total);
+console.log("Số lượt trả muộn:", late);
+    </script>
+</body>
+</html>

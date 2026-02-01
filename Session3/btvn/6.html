@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>6</title>
+</head>
+<body>
+<script>
+    let total = 0;
+    let serious = 0;
+    let medium = 0;
+    let light = 0;
+    let suggest = 0;
+    let positive = 0;
+    while (true) {
+        let answer = prompt(
+            "Co khieu nai/phan hoi moi tu ban doc khong? (co/khong)").trim().toLowerCase();
+        if (answer === "khong") break;
+        if (answer !== "co") {
+            alert("Vui long nhap 'co' hoac 'khong'");
+            continue;
+        }
+        let name = prompt("Ten ban doc:");
+        if (!name) {
+            alert("Ten ban doc khong duoc de trong!");
+            continue;
+        }
+        let cardCode = prompt("Ma the ban doc (co the bo trong):");
+        let type = Number(prompt(
+            "Loai phan hoi:\n1 - Khieu nai\n2 - De xuat cai thien\n3 - Phan hoi tich cuc"
+        ));
+        let level = 0;
+        if (type === 1) {
+            level = Number(prompt(
+                "Muc do nghiem trong:\n1 - Nhe\n2 - Trung binh\n3 - Nghiem trong"
+            ));
+        }
+        let content = prompt("Noi dung ngan gon:");
+        total++;
+        if (type === 1 && level === 3) {
+            console.log("→ Chuyen ngay lanh dao - Khieu nai nghiem trong");
+            serious++;
+        }
+        else if (type === 1 && level === 2) {
+            console.log("→ Ghi nhan, se xu ly trong ngay - Khieu nai trung binh");
+            medium++;
+        }
+        else if (type === 1 && level === 1) {
+            console.log("→ Xu ly ngay tai quay - Khieu nai nhe");
+            light++;
+        }
+        else if (type === 2) {
+            console.log("→ Cam on! De xuat da duoc ghi nhan");
+            suggest++;
+        }
+        else if (type === 3) {
+            console.log("→ Cam on ban da phan hoi tich cuc!");
+            positive++;
+        }
+        else {
+            console.log("Loai phan hoi khong hop le");
+        }
+    }
+    console.log("Tong so phan hoi/khieu nai: " + total);
+    console.log("Khieu nai nghiem trong (muc 3): " + serious);
+    console.log("Khieu nai trung binh (muc 2): " + medium);
+    console.log("Khieu nai nhe (muc 1): " + light);
+    console.log("De xuat cai thien: " + suggest);
+    console.log("Phan hoi tich cuc: " + positive);
+</script>
+</body>
+</html>

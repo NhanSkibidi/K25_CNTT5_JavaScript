@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let total = 0;
+    let lostBooks = 0;
+    let outOfStock = 0;
+    let manyStock = 0;
+    let normalStock = 0;
+
+    while (true) {
+        let answer = prompt("Tiep tuc kiem ke sach tiep theo? (co/khong)").trim().toLowerCase();
+        if (answer === "khong") {
+            break;
+        }
+        if (answer !== "co") {
+            alert("Vui long nhap 'co' hoac 'khong'");
+            continue;
+        }
+        let bookCode = prompt("Nhap ma sach:");
+        if (!bookCode) {
+            alert("Ma sach khong duoc de trong!");
+            continue;
+        }
+        let bookName = prompt("Nhap ten sach:");
+        let quantity = Number(prompt("Nhap so luong thuc te trong kho:"));
+        let status = Number(prompt("Nhap tinh trang sach:\n1 - Binh thuong\n2 - Mat"));
+        total++;
+        if (status === 2) {
+            console.log("Sach mat");
+            lostBooks++;
+        }
+        else if (status === 1 && quantity === 0) {
+            console.log("Sach het hang");
+            outOfStock++;
+        }
+        else if (status === 1 && quantity >= 10) {
+            console.log("Sach ton kho nhieu");
+            manyStock++;
+        }
+        else if (status === 1 && quantity >= 1 && quantity <= 9) {
+            console.log("Sach ton kho binh thuong");
+            normalStock++;
+        }
+    }
+    console.log("BAO CAO KIEM KE");
+    console.log("Tong so sach da kiem ke: " + total + " cuon");
+    console.log("So sach mat: " + lostBooks + " cuon");
+    console.log("So sach het hang: " + outOfStock + " cuon");
+</script>
+</body>
+</html>

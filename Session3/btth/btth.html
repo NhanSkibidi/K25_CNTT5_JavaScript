@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let password = "";
+password = prompt ("mời nhập mật khẩu"); // mật khẩu đung admin123
+let count = 0;
+let flag = true;
+while (password != "admin123"){
+if (count == 2) {
+flag = false;
+break;
+}
+count++; // 2
+password = prompt ("mật khẩu chưa đúng nhập lại");
+}
+// nếu đăng nhập đúng thì cho chọn chức năng
+// nếu đăng nhập sai thì hiển thị thông báo
+if (flag) {
+console. log ("chào admin cho chọn chức năng");
+} else {
+console. log ("đăng nhập quá số lần");
+
+}
+    </script>
+</body>
+</html>

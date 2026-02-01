@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Gia han sach</title>
+</head>
+<body>
+<script>
+    let success = 0;
+    let fail = 0;
+
+    while (true) {
+        let answer = prompt("Co yeu cau gia han moi khong? (co/khong)").trim().toLowerCase();
+        if (answer === "khong") {
+            break;
+        }
+        if (answer !== "co") {
+            alert("Nhap 'co' hoac 'khong'!");
+            continue;
+        }
+        let name = prompt("Ten ban doc:");
+        let bookName = prompt("Ten sach:");
+        let borrowed = Number(prompt("Ngay muon hien tai:"));
+        let extend = Number(prompt("Ngay gia han them:"));
+        let total = borrowed + extend;
+        if (total > 60) {
+            console.log("Khong duoc gia han: Vuot qua 60 ngay");
+            fail++;
+        } 
+        else if (borrowed > 45) {
+            console.log("Khong duoc gia han: Da muon qua 45 ngay");
+            fail++;
+        } 
+        else {
+            console.log("Gia han thanh cong");
+            success++;
+        }
+    }
+    console.log("THONG KE CA LAM VIEC");
+    console.log("So lan gia han thanh cong: " + success);
+    console.log("So lan gia han khong thanh cong: " + fail);
+</script>
+</body>
+</html>
