@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let attempt = 0;
+let login = false;
+
+while (attempt < 3) {
+    let user = prompt("Account:");
+    let pass = prompt("Password:");
+
+    if (user === "admin" && pass === "1234") {
+        login = true;
+        break;
+    } else {
+        attempt++;
+        if (user !== "admin") {
+            alert("Sai tai khoan");
+        } else {
+            alert("Sai mat khau");
+        }
+        alert("Sai lan " + attempt);
+    }
+}
+
+if (!login) {
+    alert("Tai khoan da bi khoa!");
+}
+
+while (login) {
+    let choice = prompt(
+        "1. Phan loai ma sach\n" +
+        "2. So do kho\n" +
+        "3. Du toan chi phi\n" +
+        "4. Ma sach may man\n" +
+        "5. Thoat"
+    );
+
+    if (choice === "5") {
+        alert("OUT DOOR!");
+        break;
+    }
+
+    switch (choice) {
+        case "1": {
+            let total = 0;
+            let science = 0;
+            let art = 0;
+
+            while (true) {
+                let code = Number(prompt("Nhap ma sach (0 de dung):"));
+                if (code === 0) break;
+
+                total++;
+                if (code % 2 === 0) science++;
+                else art++;
+            }
+
+            console.log("Tong:", total);
+            console.log("Khoa hoc:", science);
+            console.log("Nghe thuat:", art);
+            break;
+        }
+
+        case "2": {
+            let rows = Number(prompt("Nhap so hang:"));
+            let cols = Number(prompt("Nhap so cot:"));
+
+            for (let i = 1; i <= rows; i++) {
+                let line = "";
+                for (let j = 1; j <= cols; j++) {
+                    if (i === j) {
+                        line += `[${i}-${j}](Ke uu tien) `;
+                    } else {
+                        line += `[${i}-${j}] `;
+                    }
+                }
+                console.log(line);
+            }
+            break;
+        }
+
+        case "3": {
+            let books = Number(prompt("So luong sach hien tai:"));
+            let cost = Number(prompt("Phi bao tri / cuon:"));
+            let years = Number(prompt("So nam du toan:"));
+
+            for (let y = 1; y <= years; y++) {
+                let totalCost = books * cost;
+                console.log("Nam " + y + ": " + totalCost);
+                cost *= 1.1;
+            }
+            break;
+        }
+
+        case "4": {
+            let N = Number(prompt("Nhap N:"));
+            let count = 0;
+
+            for (let i = 1; i <= N; i++) {
+                if (i % 3 === 0 && i % 5 !== 0) {
+                    console.log(i);
+                    count++;
+                }
+            }
+            console.log("Tong ma sach may man:", count);
+            break;
+        }
+
+        default:
+            alert("Lua chon khong hop le!");
+    }
+}
+</script>
+</body>
+</html>
