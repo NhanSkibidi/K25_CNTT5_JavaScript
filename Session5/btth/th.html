@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let choose;
+let book = ["Nha Gia Kim", "Dac Nhan Tam", "Tuan Lam Viec 4 Gio"];
+
+do {
+    choose = Number(prompt(
+`Thu vien hoa hoc
+1. Xem danh sach
+2. Nhap sach moi
+3. Muon sach
+4. Sua ten sach
+5. Sap xep sach theo ten
+0. Leave`
+    ));
+
+    switch (choose) {
+        case 1:
+            for (let i = 0; i < book.length; i++) {
+                console.log(`Sach ${i + 1}: ${book[i]}`);
+            }
+            break;
+
+        case 2:
+            let newBook = prompt("Nhap ten sach moi:");
+            if (book.includes(newBook)) {
+                console.log("Sach da ton tai");
+            } else if (newBook) {
+                book.unshift(newBook);
+                console.log("Them sach thanh cong");
+            }
+            break;
+
+        case 3:
+            let borrow = prompt("Nhap ten sach muon muon:");
+            let check_index = book.indexOf(borrow);
+
+            if (check_index === -1) {
+                console.log("Sach khong ton tai");
+            } else {
+                console.log(`Da muon sach: ${book[check_index]}`);
+                book.splice(check_index, 1);
+            }
+            break;
+
+        case 4:
+            let updateBook = prompt("Nhap ten sach can sua:");
+            let index = book.indexOf(updateBook);
+
+            if (index === -1) {
+                console.log("Sach khong ton tai");
+            } else {
+                let newName = prompt("Nhap ten sach moi:");
+                if (newName) {
+                    book[index] = newName;
+                    console.log("Cap nhat thanh cong");
+                }
+            }
+            break;
+        case 5:
+            book.sort();
+            console.log("Danh sach sau khi sap xep:", book);
+            break;
+        case 0:
+            console.log("Thoat chuong trinh");
+            break;
+
+        default:
+            console.log("Lua chon khong hop le");
+    }
+} while (choose !== 0);
+</script>
+</body>
+</html>

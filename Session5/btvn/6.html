@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let cardid = []
+    let readername = []
+    let bookcodes = []
+    let late = []
+    let n = +prompt("hom nay co bao nhieu ban doc bi ghi nhan qua han?")
+    for (let i = 0; i < n; i++) {
+    let id = prompt("nhap ma the ban doc")
+    while (id == "" || cardid.indexOf(id) != -1) {
+        id = prompt("nhap lai ma the ban doc (khong trung)")
+    }cardid.push(id)
+    let name = prompt("nhap ten ban doc")
+    while (name == "") {
+        name = prompt("nhap lai ten ban doc")
+    }
+    readername.push(name)
+    let codes = prompt("nhap cac ma sach dang muon (cach nhau boi dau ,)")
+    bookcodes.push(codes)
+    let day = +prompt("nhap so ngay qua han")
+    while (day < 0 || isNaN(day)) {
+        day = +prompt("nhap lai so ngay qua han")
+    }
+    late.push(day)
+}
+let count10 = 0
+for (let i = 0; i < late.length; i++) {
+    if (late[i] >= 10) {
+        count10++
+    }
+}
+console.log("so ban doc qua han >= 10 ngay:", count10)
+console.log("ma the ban doc muon ca js va pyt:")
+for (let i = 0; i < bookcodes.length; i++) {
+    let hasjs = false
+    let haspyt = false
+    let arr = bookcodes[i].split(",")
+    for (let j = 0; j < arr.length; j++) {
+        let code = arr[j].trim()
+        if (code.indexOf("JS")) hasjs = true
+        if (code.indexOf("PYT")) haspyt = true
+    }
+    if (hasjs && haspyt) {
+        console.log(cardid[i])
+    }
+}
+let max = 0
+let indexmax = 0
+for (let i = 0; i < late.length; i++) {
+    if (late[i] > max) {
+        max = late[i]
+        indexmax = i
+    }
+}
+console.log("ban doc qua han nhieu nhat:", readername[indexmax])
+let count7 = 0
+for (let i = 0; i < late.length; i++) {
+    if (late[i] >= 7) {
+        count7++
+    }
+}
+if (count7 == 0) {
+    console.log("tinh hinh tra sach hom nay kha tot!")
+} else if (count7 <= 4) {
+    console.log("can gui nhac nho cho mot so ban doc!")
+} else {
+    console.log("tinh trang qua han nghiem trong! can lien he ngay!")
+}
+</script>
+
+</body>
+</html>

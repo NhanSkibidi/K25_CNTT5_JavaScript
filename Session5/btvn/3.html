@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let bookid = [];
+    let bookname = [];
+    let inventory = [];
+
+    let n = Number(prompt("Có bao nhiêu loại sách cần kiểm tra bổ sung hôm nay?"));
+
+    for (let i = 0; i < n; i++) {
+        let id;
+        do {
+            id = prompt(`Nhập mã sách thứ ${i + 1}:`);
+        } while (!id);
+
+        let name;
+        do {
+            name = prompt(`Nhập tên sách thứ ${i + 1}:`);
+        } while (!name);
+
+        let quantity;
+        do {
+            quantity = Number(prompt(`Nhập số lượng tồn kho của sách thứ ${i + 1}:`));
+        } while (quantity < 0 || isNaN(quantity));
+
+        bookid.push(id);
+        bookname.push(name);
+        inventory.push(quantity);
+    }
+
+    console.log("Tổng số loại sách đang kiểm tra:", bookid.length);
+
+    let low = 0;
+    for (let i = 0; i < inventory.length; i++) {
+        if (inventory[i] <= 5) {
+            low++;
+        }
+    }
+    console.log("Số sách cần ưu tiên bổ sung (≤5 bản):", low);
+    console.log("Mã sách đã hết hàng:");
+    for (let i = 0; i < inventory.length; i++) {
+        if (inventory[i] === 0) {
+            console.log(bookid[i]);
+        }
+    }
+    console.log("Danh sách chi tiết:");
+    for (let i = 0; i < bookid.length; i++) {
+        console.log(`${i + 1}. Mã: ${bookid[i]} | Tên: ${bookname[i]} | Tồn kho: ${inventory[i]}`);
+    }
+</script>
+</body>
+</html>

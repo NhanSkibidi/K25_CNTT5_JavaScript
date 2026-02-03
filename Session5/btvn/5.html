@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    let booksid = []
+    let booksname = []
+    let inventory = []
+    let category = []
+    let sl = +prompt("co bao nhieu cuon sach can kiem tra")
+    for (let index = 0; index < sl; index++) {
+
+    let input = prompt("nhap id cuon sach")
+    while (booksid.indexOf(input) != -1 || input == "") {
+        input = prompt("nhap lai id cuon sach")
+    }
+    booksid[index] = input
+
+    input = prompt("nhap ten cuon sach")
+    while (input == "") {
+        input = prompt("nhap lai ten cuon sach")
+    }
+    booksname[index] = input
+
+    input = prompt("nhap the loai sach")
+    while (input == "") {
+        input = prompt("nhap lai the loai sach")
+    }
+    category[index] = input
+
+    input = +prompt("nhap so luong sach")
+    while (input <= 0) {
+        input = +prompt("nhap lai so luong sach")
+    }
+    inventory[index] = input
+
+    alert("complete!")
+}
+let count = 0
+let duo = []
+let min = 0
+for (let index = 0; index < booksid.length; index++) {
+
+    if (category[index].toLowerCase().includes("lap trinh")) {
+        count++
+    }
+    if (
+        category[index].toLowerCase().includes("javascript") &&
+        category[index].toLowerCase().includes("web")
+    ) {
+        duo.push(booksid[index])
+    }
+    if (inventory[index] < inventory[min]) {
+        min = index
+    }
+}
+console.log("so sach the loai lap trinh:", count)
+console.log("id sach vua javascript vua web:")
+console.log(duo)
+console.log("sach co so luong it nhat:")
+console.log("ma:", booksid[min],"ten:", booksname[min],"the loai:", category[min],"sl:", inventory[min])
+</script>
+</body>
+</html>

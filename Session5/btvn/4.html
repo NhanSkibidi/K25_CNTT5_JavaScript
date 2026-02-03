@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let booksid = []
+let booksname = []
+let bookstatus = []
+let n = Number(prompt("co bao nhieu cuon sach can kiem tra tinh trang hom nay?"))
+for (let i = 0; i < n; i++) {
+    let id = ""
+    while (!id) {
+        id = prompt("nhap ma sach:")
+    }
+    let name = ""
+    while (!name) {
+        name = prompt("nhap ten sach:")
+    }
+    let choice
+    do {
+        choice = Number(prompt("nhap tinh trang:\n1 hong nhe\n2 hong nang\n3 can sua gap"))
+    } while (choice < 1 || choice > 3)
+    let status = ""
+    if (choice === 1) status = "hong nhe"
+    if (choice === 2) status = "hong nang"
+    if (choice === 3) status = "can sua gap"
+    booksid.push(id)
+    booksname.push(name)
+    bookstatus.push(status)
+}
+function inDanhSach() {
+    console.log("danh sach hien tai:")
+    for (let i = 0; i < booksid.length; i++) {
+        console.log(
+            (i + 1) + ". " + booksid[i] + " | " + booksname[i] + " | " + bookstatus[i]
+        )
+    }
+}inDanhSach()
+while (true) {
+    let action = Number(prompt(
+        "chon thao tac:\n1 sua tinh trang\n2 loai bo sach\n0 ket thuc"))
+    if (action === 0) break
+    if (action === 1) {
+        let findid = prompt("nhap ma sach can sua:")
+        for (let i = 0; i < booksid.length; i++) {
+            if (booksid[i] === findid) {
+                let c = Number(prompt(
+                    "chon tinh trang moi:\n1 hong nhe\n2 hong nang\n3 can sua gap\n4 da sua xong\n5 loai bo"
+                ))
+                let newstatus = ""
+                if (c === 1) newstatus = "hong nhe"
+                if (c === 2) newstatus = "hong nang"
+                if (c === 3) newstatus = "can sua gap"
+                if (c === 4) newstatus = "da sua xong"
+                if (c === 5) newstatus = "loai bo"
+                bookstatus[i] = newstatus
+            }
+        }
+        inDanhSach()
+    }
+    if (action === 2) {
+        let delid = prompt("nhap ma sach can xoa:")
+        for (let i = 0; i < booksid.length; i++) {
+            if (booksid[i] === delid) {
+                booksid.splice(i, 1)
+                booksname.splice(i, 1)
+                bookstatus.splice(i, 1)
+                break
+            }
+        }
+        inDanhSach()
+    }
+}
+let dasua = 0
+let loaibo = 0
+for (let i = 0; i < bookstatus.length; i++) {
+    if (bookstatus[i] === "da sua xong") dasua++
+    if (bookstatus[i] === "loai bo") loaibo++
+}
+console.log("bao cao cuoi:")
+console.log("tong sach con lai:", booksid.length)
+console.log("so sach da sua xong:", dasua)
+console.log("so sach loai bo:", loaibo)
+inDanhSach()
+    </script>
+</body>
+</html>
