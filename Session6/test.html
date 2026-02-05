@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <script>
+        let students=["Quý", "Nam","Lan","Hung","Nam"];
+        console.log("Dao nguoc vi tri trong mang",students.reverse());
+        if(students.includes("Lan") == true){
+            console.log("Ten Lan da ton tai trong mang")
+        }else{
+            console.log("ten Lan khong ton tai trong mang")
+        }
+        if(students.indexOf("Nam") == -1){
+            console.log("khong tim thay ten Nam");
+        }else{
+            console.log("Nam here",students.indexOf("Nam"));
+        }
+        //2
+        let money=["100","200","300","400"];
+        for(const element of money){
+            console.log(element);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+    let attempt = 0;
+    let login = false;
+    while (attempt < 3) {
+    let user = prompt("Account:");
+    let pass = prompt("Password:");
+    if (user === "admin" && pass === "1234") {
+        login = true;
+        break;
+    } else {
+        attempt++;
+        if (user !== "admin") {
+            alert("Sai tai khoan");
+        } else {
+            alert("Sai mat khau");
+        }
+        alert("Sai lan " + attempt);
+    }
+}
+if (!login) {
+    alert("Tai khoan da bi khoa!");
+} */
+while (login) {
+    let choice = prompt(
+        "=== QUẢN LÝ THƯ VIỆN ===\n" +
+        "1. Nhập thêm lô sách mới\n" +
+        "2. Hiển thị danh sách sách\n" +
+        "3. Tìm kiếm sách\n" +
+        "4. Cập nhật tên sách\n" +
+        "5. Đảo ngược thứ tự kệ sách\n" +
+        "6. Nhập kho từ nguồn khác\n" +
+        "7. Thoát chương trình"
+    );
+    if(choice==="7"){
+        alert("leave!");
+        break;
+    }else if(choice > "7"){
+        alert("error!!!!! try again")
+    }
+    switch(choice){
+        case 1:
+            let books=["Sử,Địa,Lý"];
+    }
+}
+    </script>
+</body>
+</html>

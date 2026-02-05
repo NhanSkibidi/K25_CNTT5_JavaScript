@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let count = 0;
+let login = false;
+let username, password;
+while (count < 3) {
+    username = prompt("nhap tai khoan");
+    password = prompt("nhap mat khau");
+    if (username === "admin" && password === "12345") {
+        alert("dang nhap thanh cong");
+        login = true;
+        break;
+    } else {
+        count++;
+        if (username !== "admin") {
+            alert("sai tai khoan");
+        } else {
+            alert("sai mat khau");
+        }
+        alert("ban da nhap sai lan " + count);
+    }
+}
+if (!login) {
+    alert("tai khoan da bi khoa");
+}
+let choice;
+let books = [];
+if (login) {
+    do {
+        choice = Number(prompt(
+            "quan ly thu vien\n" +
+            "1. them sach\n" +
+            "2. hien thi sach\n" +
+            "3. tim sach\n" +
+            "4. sua ten sach\n" +
+            "5. dao nguoc danh sach\n" +
+            "6. nhap sach tu nguon khac\n" +
+            "7. thoat"
+        ));
+        switch (choice) {
+            case 1:
+                let input = prompt("nhap ten sach (cach nhau dau ,)");
+                let arr = input.split(",");
+                for (let i = 0; i < arr.length; i++) {
+                    let name = arr[i].trim();
+                    if (name !== "") {
+                        books.push(name);
+                    }
+                }
+                break;
+            case 2:
+                for (let i = 0; i < books.length; i++) {
+                    console.log((i + 1) + ". " + books[i]);
+                }
+                break;
+            case 3:
+                let find = prompt("nhap ten sach can tim");
+                let pos = books.indexOf(find);
+                if (pos === -1) {
+                    console.log("khong tim thay");
+                } else {
+                    console.log("tim thay o vi tri " + pos);
+                }
+                break;
+            case 4:
+                let oldname = prompt("nhap ten sach can sua");
+                let index = books.indexOf(oldname);
+                if (index !== -1) {
+                    books[index] = prompt("nhap ten moi");
+                }
+                break;
+            case 5:
+                books.reverse();
+                break;
+            case 6:
+                books = books.concat(["sach ky nang", "truyen tranh"]);
+                break;
+        }
+    } while (choice !== 7);
+}
+alert("hen gap lai");
+</script>
+</body>
+</html>
