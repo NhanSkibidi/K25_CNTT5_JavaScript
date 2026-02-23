@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerIds = ["P001", "P002", "P003", "P004", "P005"];
+        let playerNames = [
+        "Nguyễn Văn A",
+        "Trần Thị B",
+        "Lê Văn C",
+        "Phạm Văn D",
+        "Hoàng Thị E"
+];
+        let playerJerseyNumbers = [10, 7, 8, 9, 11];
+        function printTeamRoster() {
+        console.log("DANH SÁCH ĐỘI BÓNG:");
+        for (let i = 0; i < playerIds.length; i++) {
+            console.log(
+            `${playerIds[i]} - ${playerNames[i]} - Số áo: ${playerJerseyNumbers[i]}`
+            );
+        }
+        }
+        function updatePlayer() {
+        let id = prompt("Nhập mã cầu thủ muốn cập nhật (ví dụ: P001):");
+        let index = playerIds.indexOf(id);
+
+        if (index === -1) {
+            alert("Không tìm thấy cầu thủ với mã này!");
+            return;
+        }
+
+        let newName = prompt("Nhập tên mới cho cầu thủ:");
+        let newJersey = parseInt(
+            prompt("Nhập số áo mới (1–99):"),
+            10
+        );
+
+        if (isNaN(newJersey) || newJersey < 1 || newJersey > 99) {
+            alert("Số áo không hợp lệ!");
+            return;
+        }
+
+        playerNames[index] = newName;
+        playerJerseyNumbers[index] = newJersey;
+
+        alert("Cập nhật thành công!");
+        printTeamRoster();
+}
+    printTeamRoster();
+    updatePlayer();
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let players = []
+let n = parseInt(prompt("co bao nhieu cau thu can nhap vao doi bong?"))
+
+for (let i = 0; i < n; i++) {
+  let id
+  let name
+  let posnum
+  let position
+  let check
+
+  do {
+    check = true
+    id = prompt("nhap ma cau thu:")
+
+    for (let j = 0; j < players.length; j++) {
+      let parts = players[j].split("-")
+      if (parts[0] === id) {
+        alert("ma cau thu da ton tai")
+        check = false
+        break
+      }
+    }
+  } while (!check || id === "")
+
+  do {
+    name = prompt("nhap ten cau thu:")
+  } while (name === "")
+
+  do {
+    posnum = parseInt(prompt("chon vi tri: 1=thu mon, 2=hau ve, 3=tien ve, 4=tien dao"))
+    if (posnum === 1) position = "thu mon"
+    else if (posnum === 2) position = "hau ve"
+    else if (posnum === 3) position = "tien ve"
+    else if (posnum === 4) position = "tien dao"
+    else position = ""
+  } while (position === "")
+
+  players.push(id + "-" + name + "-" + position)
+}
+
+function printteamroster() {
+  for (let i = 0; i < players.length; i++) {
+    let parts = players[i].split("-")
+    console.log(
+      (i + 1) + ". ma: " + parts[0] + " | ten: " + parts[1] + " | vi tri: " + parts[2]
+    )
+  }
+}
+
+function pushplayer(name, position) {
+  let id
+  let check
+
+  do {
+    check = true
+    id = prompt("nhap ma cau thu moi:")
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].split("-")[0] === id) {
+        alert("ma da ton tai")
+        check = false
+        break
+      }
+    }
+  } while (!check || id === "")
+
+  players.push(id + "-" + name + "-" + position)
+}
+
+printteamroster()
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let players = [
+    "p001-nguyen van a-thu mon",
+    "p002-tran thi b-hau ve",
+    "p003-le van c-hau ve",
+    "p004-pham van d-tien ve",
+    "p005-hoang thi e-tien dao",
+    "p006-vu minh f-tien dao",
+    "p007-dang van g-thu mon"
+];
+
+function getallpositions(){
+    let result = [];
+    for(let i=0;i<players.length;i++){
+        let parts = players[i].split("-");
+        let position = parts[2];
+        if(result.indexOf(position) === -1){
+            result.push(position);
+        }
+    }
+    return result;
+}
+
+function findplayerswithlongestname(){
+    let longest = "";
+    for(let i=0;i<players.length;i++){
+        let parts = players[i].split("-");
+        let name = parts[1];
+        if(name.length > longest.length){
+            longest = name;
+        }
+    }
+    return longest;
+}
+
+function countplayersstartingwithletter(letter){
+    let count = 0;
+    letter = letter.toLowerCase();
+    for(let i=0;i<players.length;i++){
+        let parts = players[i].split("-");
+        let name = parts[1].toLowerCase();
+        if(name.startsWith(letter)){
+            count++;
+        }
+    }
+    return count;
+}
+
+console.log("cac vi tri trong doi:");
+console.log(getallpositions());
+
+console.log("cau thu co ten dai nhat:");
+console.log(findplayerswithlongestname());
+
+console.log("so cau thu co ten bat dau bang chu n:");
+console.log(countplayersstartingwithletter("n"));
+    </script>
+</body>
+</html>

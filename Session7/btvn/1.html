@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerids = [];
+let playerpositions = [];
+let n = +prompt("co bao nhieu cau thu can nhap vao doi bong?");
+for (let i = 0; i < n; i++) {
+    console.log("nhap cau thu " + (i + 1));
+    let id;
+    let check;
+    do {
+        check = true;
+        id = prompt("nhap ma cau thu:");
+
+        for (let j = 0; j < playerids.length; j++) {
+            if (playerids[j] === id) {
+                alert("ma cau thu da ton tai, nhap lai");
+                check = false;
+                break;
+            }
+        }
+    } while (!check);
+    let posnumber = +prompt(
+        "vi tri (1: thu mon, 2: hau ve, 3: tien ve, 4: tien dao):"
+    );
+    let position = "";
+    if (posnumber == 1) position = "thu mon";
+    else if (posnumber == 2) position = "hau ve";
+    else if (posnumber == 3) position = "tien ve";
+    else if (posnumber == 4) position = "tien dao";
+    else position = "khong hop le";
+
+    playerids.push(id);
+    playerpositions.push(position);
+}
+    function printteamroster() {
+    console.log("doi bong hien tai (" + playerids.length + " cau thu):");
+    for (let i = 0; i < playerids.length; i++) {
+        console.log((i + 1) + ". " + playerids[i] + " - " + playerpositions[i]);
+    }
+}
+    function findplayersbyposition(position) {
+    let result = [];
+    for (let i = 0; i < playerpositions.length; i++) {
+        if (playerpositions[i] === position) {
+            result.push(i);
+        }
+    }
+    return result;
+}
+
+    printteamroster();
+    let findpos = +prompt(
+    "nhap vi tri muon dem (1: thu mon, 2: hau ve, 3: tien ve, 4: tien dao):"
+    );
+    let findposition = "";
+    if (findpos == 1) findposition = "thu mon";
+    else if (findpos == 2) findposition = "hau ve";
+    else if (findpos == 3) findposition = "tien ve";
+    else if (findpos == 4) findposition = "tien dao";
+
+    let indexes = findplayersbyposition(findposition);
+
+    console.log("so cau thu o vi tri " + findposition + ": " + indexes.length);
+    console.log("cac chi so cau thu o vi tri " + findposition + ": " + indexes);
+    </script>
+</body>
+</html>

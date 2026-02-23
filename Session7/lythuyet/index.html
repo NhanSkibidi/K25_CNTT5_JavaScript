@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+let playerlist = [];
+let goallist = [];
+let choose;
+
+do {
+    choose = +prompt(
+        "1. nhap cau thu moi\n" +
+        "2. xem danh sach doi hinh\n" +
+        "3. xem thanh tich toan doi\n" +
+        "4. tim vua pha luoi\n" +
+        "0. thoat"
+    );
+
+    switch (choose) {
+        case 1:
+            let name = prompt("nhap ten cau thu");
+            let goal = +prompt("nhap so ban thang");
+            addplayer(name, goal);
+            break;
+
+        case 2:
+            showsquad();
+            break;
+
+        case 3:
+            console.log("tong ban thang cua doi:", gettotalgoal());
+            break;
+
+        case 4:
+            findtopscorer();
+            break;
+
+        case 0:
+            console.log("thoat chuong trinh");
+            break;
+
+        default:
+            console.log("lua chon khong hop le");
+    }
+
+} while (choose != 0);
+
+// them cau thu
+function addplayer(name, goal) {
+    playerlist.push(name);
+    goallist.push(goal);
+    console.log("da them cau thu:", name);
+}
+
+// hien thi doi hinh
+function showsquad() {
+    if (playerlist.length == 0) {
+        console.log("chua co cau thu");
+        return;
+    }
+    for (let i = 0; i < playerlist.length; i++) {
+        console.log((i + 1) + ". " + playerlist[i] + " - " + goallist[i] + " ban");
+    }
+}
+
+// tinh tong ban thang
+function gettotalgoal() {
+    let sum = 0;
+    for (let i = 0; i < goallist.length; i++) {
+        sum += goallist[i];
+    }
+    return sum;
+}
+
+// tim vua pha luoi
+function findtopscorer() {
+    if (goallist.length == 0) {
+        console.log("chua co cau thu");
+        return;
+    }
+    let max = goallist[0];
+    let index = 0;
+    for (let i = 1; i < goallist.length; i++) {
+        if (goallist[i] > max) {
+            max = goallist[i];
+            index = i;
+        }
+    }
+    console.log("vua pha luoi:", playerlist[index]);
+}
+</script>
+</body>
+</html>
