@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let players=[
+    "Messi - Forward",
+    "Ronaldo - Forward",
+    "Neymar - Forward",
+    "De Bruyne - Midfielder",
+    "Kante - Midfielder",
+    "Van Dijk - Defender",
+    "Alisson - Goalkeeper"
+        ];
+        function filter(position,players){
+            return players.filter(function(player){
+                let p=player.split("-");
+                return p[1]===position;
+            });
+        }
+        let result=filter("Midfielder",players);
+        let reults2=filter("Forward",players)
+    </script>
+</body>
+</html>
