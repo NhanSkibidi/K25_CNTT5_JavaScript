@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let names = ["iPhone 15", "Samsung S23", "Oppo Reno", "Xiaomi 13", "Nokia C20"];
+let prices = [1200, 900, 450, 600, 80];
+let stocks = [10, 5, 0, 8, 15];
+let run = true;
+while (run) {
+  let input = prompt(`
+1. loc san pham > 500
+2. kiem tra du lieu
+3. tong gia tri kho
+4. giam 10%
+5. tim san pham
+6. bao cao ton kho
+7. thoat
+chon:
+`);
+  let choice = Number(input);
+  switch (choice) {
+    case 1:
+      let list = names.filter((_, i) => prices[i] > 500);
+      alert(list.length ? list.join(", ") : `khong co san pham`);
+      break;
+
+    case 2:
+      let hethang= stocks.some(s => s === 0);
+      let lon100 = prices.every(p => p > 100);
+
+      alert(`
+      co san pham het hang: ${hethang ? "co" : "khong"}
+      tat ca gia > 100: ${lon100 ? "dung" : "sai"}
+`);
+      break;
+    case 3:
+      let tong = prices.reduce((sum, price, i) => sum + price * stocks[i], 0);
+      alert(`tong gia tri kho: ${tong}`);
+      break;
+    case 4:
+      prices.forEach((price, i) => {
+        prices[i] = price * 0.9;
+      });
+      alert(`da giam 10%`);
+      break;
+    case 5:
+      let keyword = prompt(`nhap tu khoa:`);
+      if (!keyword) break;
+      keyword = keyword.toLowerCase();
+      let result = names
+        .map((name, i) => ({
+          name,
+          price: prices[i],
+          stock: stocks[i]
+        }))
+        .filter(p => p.name.toLowerCase().includes(keyword))
+        .map(p => `${p.name} - ${p.price} - ${p.stock}`);
+      alert(result.length ? result.join("\n") : `khong tim thay`);
+      break;
+
+    case 6:
+      let report = names.map((name, i) => {
+        let status = stocks[i] > 0 ? "con hang" : "het hang";
+        return `${name}: ${status} (${stocks[i]})`;
+      });
+      alert(report.join("\n"));
+      break;
+    case 7:
+      run = false;
+      alert(`bimbimbombom`);
+      break;
+    default:
+      alert(`Wrong!`);
+  }
+}
+    </script>
+</body>
+</html>

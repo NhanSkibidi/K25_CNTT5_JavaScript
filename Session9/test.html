@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let order = ["Don hang A","Don hang B","Don hang C","DOn hang D","Don hang E"];
+        function hang(order){
+        order.forEach(function(orders){
+            console.log(order)
+        });
+    }
+     hang(order);
+        let revenues = [1500,2800,1200,-500,3200];
+        let result2 = revenues.some(function(elemental,index){return elemental <0})
+        console.log(result2);
+        let result3 = revenues.every(function(elemental,index){return elemental>500})
+        console.log(result3)
+    </script>
+</body>
+</html>
