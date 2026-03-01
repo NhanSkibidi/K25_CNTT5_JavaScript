@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let student = [];
+        let id = 0;
+        const showMenu = ()=>{
+           let choice = Number(prompt(`
+           ===== STUDENT MANAGEMENT =====
+1. Create Student
+2. Read All Students
+3. Filter Scholarship Candidates (GPA > 8)
+4. Update Student Profile
+5. Delete Record
+6. Compliance Verification
+7. Academic Statistics
+8. Data Normalization
+0. Exit
+Choose:
+           `)) ;
+           return choice;
+        }
+        const main = () =>{
+            while(true){
+                let choice = showMenu();
+                switch(choice){
+                    case 1: {
+                    let name = prompt("Enter name:");
+                    if (name.trim() === "") {
+                        alert("Name cannot be empty!");
+                        break;
+                    }
+
+                    let age = parseInt(prompt("Enter age:"));
+                    let gpa = parseFloat(prompt("Enter GPA:"));
+                    let status = prompt("Enter status (active/inactive):");
+
+                    let newStudent = {
+                        id: id++,
+                        name,
+                        age,
+                        gpa,
+                        status
+                    };
+
+                    students.push(newStudent);
+                    alert("Success!");
+                    break;
+                }
+
+                case 2: {
+                    if (students.length === 0) {
+                        alert("No students found!");
+                    } else {
+                        console.table(students);
+                        alert("Check console to see student list.");
+                    }
+                    break;
+                }
+
+                case 3: {
+                    let scholarship = students.filter(s => s.gpa > 8);
+
+                    if (scholarship.length === 0) {
+                        alert("No scholarship students.");
+                    } else {
+                        console.table(scholarship);
+                        alert("Check console.");
+                    }
+                    break;
+                }
+
+                case 4: {
+                    let findId = Number(prompt("Enter ID to update:"));
+                    let found = students.find(s => s.id === findId);
+
+                    if (!found) {
+                        alert("Student not found!");
+                    } else {
+                        found.name = prompt("Enter new name:");
+                        found.gpa = parseFloat(prompt("Enter new GPA:"));
+                        alert("Updated successfully!");
+                    }
+                    break;
+                }
+
+                case 5: {
+                    let deleteId = Number(prompt("Enter ID to delete:"));
+                    let index = students.findIndex(s => s.id === deleteId);
+
+                    if (index === -1) {
+                        alert("Student not found!");
+                    } else {
+                        students.splice(index, 1);
+                        alert("Deleted successfully!");
+                    }
+                    break;
+                }
+
+                case 6: {
+                    let hasUnder18 = students.some(s => s.age < 18);
+                    let allActive = students.every(s => s.status === "active");
+
+                    console.log("Any student under 18:", hasUnder18);
+                    console.log("All students active:", allActive);
+                    alert("Check console for compliance results.");
+                    break;
+                }
+
+                case 7: {
+                    if (students.length === 0) {
+                        alert("No data.");
+                    } else {
+                        let avg = students.reduce((sum, s) => sum + s.gpa, 0) / students.length;
+                        alert("Average GPA: " + avg.toFixed(2));
+                    }
+                    break;
+                }
+
+                case 8: {
+                    let normalized = students.map(s => ({
+                        ...s,
+                        name: s.name.toUpperCase()
+                    }));
+                    console.table(normalized);
+                    alert("Uppercase list printed in console.");
+                    break;
+                }
+                case 0:
+                    alert("Leaving right now!");
+                    return;
+                default:
+                    alert("Wrong choice!");
+            }
+        }
+    }
+    main();
+    </script>
+</body>
+</html>

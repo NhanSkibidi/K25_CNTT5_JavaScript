@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+    { name: "Messi", position: "Forward", age: 36, goals: 25, assists: 15, matches: 34, yellowCards: 2 },
+    { name: "Ronaldo", position: "Forward", age: 39, goals: 30, assists: 10, matches: 38, yellowCards: 4 },
+    { name: "Neymar", position: "Forward", age: 32, goals: 18, assists: 20, matches: 32, yellowCards: 3 },
+    { name: "De Bruyne", position: "Midfielder", age: 33, goals: 8, assists: 25, matches: 35, yellowCards: 1 },
+    { name: "Kante", position: "Midfielder", age: 33, goals: 2, assists: 5, matches: 30, yellowCards: 0 },
+    { name: "Van Dijk", position: "Defender", age: 33, goals: 5, assists: 3, matches: 33, yellowCards: 2 },
+    { name: "Allisson", position: "Goalkeeper", age: 31, goals: 0, assists: 1, matches: 37, yellowCards: 0 },
+];
+        function generateRankingReport(minMatches, players){
+            let game = players.filter(player => {
+        return player.matches >= minMatches;
+    });
+
+    let calculatedPlayers = game.map(player => {
+        let performance = (player.goals + player.assists) / player.matches;
+        performance = Number(performance.toFixed(2));
+
+        let efficiency = performance - (player.yellowCards / player.matches) * 10;
+        efficiency = Number(efficiency.toFixed(2));
+
+        return {
+            name: player.name,
+            goals: player.goals,
+            performanceScore: performance,
+            efficiencyScore: efficiency
+        };
+    });
+
+    for (let i = 0; i < calculatedPlayers.length - 1; i++) {
+        for (let j = i + 1; j < calculatedPlayers.length; j++) {
+            if (calculatedPlayers[j].efficiencyScore > calculatedPlayers[i].efficiencyScore) {
+                let temp = calculatedPlayers[i];
+                calculatedPlayers[i] = calculatedPlayers[j];
+                calculatedPlayers[j] = temp;
+            }
+        }
+    }
+
+    console.log("BẢNG XẾP HẠNG CẦU THỦ (đủ số trận)\n");
+
+    for (let i = 0; i < calculatedPlayers.length; i++) {
+        let p = calculatedPlayers[i];
+        console.log(
+            "Hạng " + (i + 1) + ": " + p.name +
+            " | Hiệu quả: " + p.efficiencyScore +
+            " | Đóng góp: " + p.performanceScore +
+            " | Bàn thắng: " + p.goals
+        );
+    }
+
+    console.log("Số cầu thủ được xếp hạng:", calculatedPlayers.length);
+
+    if (calculatedPlayers.length > 0) {
+        console.log("Cầu thủ đứng đầu bảng:", calculatedPlayers[0].name);
+    }
+
+    let sum = 0;
+    let limit = calculatedPlayers.length < 3 ? calculatedPlayers.length : 3;
+
+    for (let i = 0; i < limit; i++) {
+        sum += calculatedPlayers[i].efficiencyScore;
+    }
+
+    if (limit > 0) {
+        console.log("Hiệu suất trung bình top 3:", (sum / limit).toFixed(2));
+    }
+}
+
+generateRankingReport(30, players);
+    </script>
+</body>
+</html>

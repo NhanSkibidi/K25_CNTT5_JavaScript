@@ -36,10 +36,14 @@
         }
     }
     badstudent(students)
-    function newstudent(studentlist){
-        return newstudent.map(students => `Tên: ${student.name} - Điểm: ${student.score}`)
-
-    }
+    function newStudent(studentList){
+    return studentList.map(student => 
+        `Tên: ${student.name} - Điểm: ${student.score}`
+    );
+}
+const labelStudent = newStudent(students);
+console.log("Hiển thị danh sách:");
+console.log(labelStudent);
     </script>
 </body>
 </html>
