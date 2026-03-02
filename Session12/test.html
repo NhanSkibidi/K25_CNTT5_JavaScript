@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let students = [
+        { id: 1, name: "Nguyen Van A", score: 8.5, gender: "Nam" },
+        { id: 2, name: "Trân Thị B", score: 4.2, gender: "Nữ" },
+        { id: 3, name: "Lê Văn C", score: 9.0, gender: "Nam" },
+        { id: 4, name: "Phạm Thị D", score: 5.5, gender: "Nữ" },
+        { id: 5, name: "Hoang Văn E", score: 3.8, gender: "Nam" }
+        ];
+        function womenbestscore(student){
+            let woman = student.filter(student => student.gender === "Nữ");
+                woman.sort((a,b)=>b.score - a.score);
+                return woman;
+        }
+        let results = womenbestscore(students);
+        console.log(results);
+        function allname(studentList) {
+            let passedstudent = studentList.filter(s => s.score >= 5.0);
+            return passedstudent.map(s => s.name);
+        }
+
+        let listname = allname(students);
+        console.log(listname);
+        function averageman(studentlist){
+           let males = studentList.filter(s => s.gender === "Nam");
+        let totalScore = males.reduce((sum, s) => sum + s.score, 0);
+        return totalScore / males.length; 
+        }
+        console.log(averageman(students).toFixed(1));
+    </script>
+</body>
+</html>
