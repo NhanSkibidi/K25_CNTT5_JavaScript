@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let student=[];
+        const showmenu =()=>{
+            let choice = Number(prompt(`
+            ==== STUDENT MANAGER ADVANCED ====
+                1.Create Student
+                2.Update Student
+                3.Soft Delete Student
+                4.Restore Student
+                5.View Students
+                6.Analytics Dashboard
+                7.Exit
+`)) 
+                return choice ;
+        }
+        const main = () =>{
+            while(true){
+                let choice = showmenu();
+                switch(choice){
+                    case 1:// created student
+                        let id = prompt("id(EX:SV01): ");
+                        if(id.trim()===""){
+                            alert("emty");
+                            break;
+                        }
+                        let sameid = student.find(s => s.id === id.trim());
+                        if(sameid){
+                            alert("trung id!")
+                            break;
+                        }
+                        let name = prompt("Name");
+                        if(name.trim()===""){
+                            alert("khong dc cach");
+                            break;
+                        }
+                        let age = parseInt(prompt("age(16>60):"));
+                        if(isNaN(age)||age <16 || age >60){
+                            alert("phai tu 16 den 60");
+                            break;
+                        }
+                        let gpa = parseFloat(prompt("gpa(0.0 den 10.0):"));
+                        if(isNaN(gpa)||gpa < 0.0||gpa>10){
+                            alert("phai tu 0.0 den 10.0");
+                            break;
+                        }
+                        let status = prompt("statuts(active or inactive)");
+                        if (status != "active" && status !="inactive"){
+                            alert("must active or inactive");
+                            break;
+                        }
+                        let newstudent ={
+                            id: id,
+                            name:name,
+                            age:age,
+                            gpa:gpa,
+                            status:status,
+                            createdAt: Date.now(),
+                            updatedAt: updatedAt,
+                            deletedAt: deletedAt,
+                        }
+                        student.push(newstudent);
+                        alert("sucessfully!");
+                        break;
+                    case 2: // Update Student
+                    let editid = prompt("nhap id can sua:");
+                    if (!editid) break;
+                    let targetstudent = student.find(s => s.id === editid.trim());
+                    if (!targetstudent) {
+                        alert("co dau?");
+                        break;
+                    }
+                    let newname = prompt(`Edit name (Tên cũ: ${targetstudent.name})`);
+                    if (newname && newname.trim() !== "") {
+                        targetstudent.name = newname.trim();
+                    }
+
+                    let ageInput = prompt(`Edit age (Tuổi cũ: ${targetstudent.age})`);
+                    if (ageInput && ageInput.trim() !== "") {
+                        let numage = parseInt(ageInput);
+                        if (!isNaN(numage) && numage >= 16 && numage <= 60) {
+                            targetstudent.age = numage;
+                        } else {
+                            alert("Tuổi phải từ 16 đến 60!");
+                        }
+                    }
+
+                    let gpaInput = prompt(`Edit GPA (GPA cũ: ${targetstudent.gpa})`);
+                    if (gpaInput && gpaInput.trim() !== "") {
+                        let numgpa = parseFloat(gpaInput);
+
+                        if (!isNaN(numgpa) && numgpa >= 0.0 && numgpa <= 10.0) {
+                            targetstudent.gpa = numgpa;
+                        } else {
+                            alert("GPA phải từ 0.0 đến 10.0!");
+                        }
+                    }
+                    targetstudent.updatedAt = Date.now();
+                    alert("Successfully updated!");
+                    break;
+                    case 3://delete
+                    let del = prompt("nhap id can xoa");
+                    if(!del){
+                        break;
+                    }
+                    let targetstudentdelete = student.find(s => s.id === del.trim());
+                    if(!targetstudentdelete){
+                        alert("khong tim thay!");
+                        break;
+                    }
+                    if(targetstudentdelete.status ==="inactive"){
+                        alert("xoa roi babe!");
+                        break;
+                    }
+                    let accept = confirm(`xac nhan xoa ${targetstudentdelete.name}`);
+                    if(accept){
+                        targetstudentdelete.status = "inactive";
+                        targetstudentdelete.deletedAt = Date.now();
+                        alert("Deleted!");
+                    }
+                    break;
+                    case 4:
+                        let idRestore = prompt("Nhập ID sinh viên muốn khôi phục:");
+                    if (!idRestore) break;
+                    let targetRestore = student.find(s => s.id === idRestore.trim());
+                    if (!targetRestore) {
+                        alert("Không tìm thấy ID này trong hệ thống!");
+                        break;
+                    }
+                    if (targetRestore.status === "active") {
+                        alert("person active!");
+                        break;
+                    }
+                    targetRestore.status = "active";
+                    targetRestore.deletedAt = null; // Xóa ngày bị xóa (đưa về null)
+                    targetRestore.updatedAt = Date.now();
+                    
+                    alert("Khôi phục sinh viên thành công!");
+                    break;
+                    case 7:
+                        alert("Exiting!");
+                        return;
+                    default :
+                    alert("Wrong! again");
+                }
+            }
+        }
+        main();
+    </script>
+</body>
+</html>
