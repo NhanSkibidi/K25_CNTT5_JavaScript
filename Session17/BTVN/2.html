@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 500px;
+}
+
+.add-task {
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+}
+
+.add-task input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+}
+
+.add-task button {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4ead7;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 6px solid #ff8c00;
+}
+
+.done {
+    background-color: #cfe3d4;
+    border-left-color: #008000;
+}
+
+.done .text {
+    text-decoration: line-through;
+    color: #555555;
+}
+
+.header {
+    background: rgb(211, 47, 47);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header p {
+    margin-top: 5px;
+}
+
+.text {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.status {
+    color: #777777;
+    font-style: italic;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.edit, .delete {
+    border: 2px solid #ff0000;
+    background: transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 4px;
+    margin-left: 8px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+body {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+}
+
+.task-list {
+    padding: 20px;
+}
+
+.footer {
+    padding: 15px;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+</style>
+<body>
+    <div class="container">
+
+    <div class="header">
+        <h1>Chuẩn bị Tết Nguyên Đán</h1>
+        <p>Danh sách việc cần làm</p>
+    </div>
+
+    <div id="todoList" class="task-list"></div>
+
+    <div id="status" class="footer"></div>
+
+</div>
+<script>
+    const initialData = [
+    { task: "Mua bánh chưng", done: false },
+    { task: "Dọn nhà đón Tết", done: false },
+    { task: "Gói bánh chưng", done: false },
+    { task: "Trang trí nhà cửa bằng hoa mai, hoa đào", done: false },
+    { task: "Mua phong bao lì xì", done: false },
+    { task: "Chuẩn bị mâm ngũ quả", done: false }
+];
+
+const container = document.querySelector("#todoList");
+let dataStore = JSON.parse(localStorage.getItem("myTodos")) || initialData;
+
+const displayTasks = () => {
+    container.textContent = "";
+
+    for (let i = 0; i < dataStore.length; i++) {
+        const item = dataStore[i];
+        const taskElement = document.createElement("div");
+        
+        taskElement.className = item.done ? "task done" : "task";
+
+        taskElement.innerHTML = `
+            <span class="icon">${item.done ? "✔️" : "⚪"}</span>
+            <span class="text">${item.task}</span>
+        `;
+
+        taskElement.addEventListener("click", () => {
+            dataStore[i].done = !dataStore[i].done;
+            saveAndRefresh();
+        });
+
+        container.append(taskElement);
+    }
+};
+
+function saveAndRefresh() {
+    const jsonString = JSON.stringify(dataStore);
+    localStorage.setItem("myTodos", jsonString);
+    displayTasks();
+}
+
+displayTasks();
+</script>
+</body>
+</html>

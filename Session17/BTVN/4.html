@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+<body>
+     <div class="container">
+        <div class="header">
+            <h1>Chuẩn bị Tết Nguyên Đán</h1>
+            <p>Danh sách việc cần làm</p>
+        </div>
+        <div class="add-task">
+            <input id="newTask" placeholder="Thêm công việc mới..." />
+            <button onclick="addTask()">Thêm</button>
+        </div>
+        <div id="todoList"></div>
+        <div id="todoList" class="task-list"></div>
+        <div id="status" class="footer"></div>
+    </div>
+<script>
+    const initialData = [
+    { task: "Mua bánh chưng", done: false },
+    { task: "Dọn nhà đón Tết", done: false },
+    { task: "Gói bánh chưng", done: false },
+    { task: "Trang trí nhà cửa bằng hoa mai, hoa đào", done: false },
+    { task: "Mua phong bao lì xì", done: false },
+    { task: "Chuẩn bị mâm ngũ quả", done: false }
+];
+const listContainer = document.getElementById("todoList");
+const inputField = document.getElementById("newTask");
+let dataStorage = JSON.parse(localStorage.getItem("myTodos")) || initialData;
+function commitData() {
+    localStorage.setItem("myTodos", JSON.stringify(dataStorage));
+}
+function updateView() {
+    listContainer.innerHTML = "";
+    for (let i = 0; i < dataStorage.length; i++) {
+        const item = dataStorage[i];
+        const taskBox = document.createElement("div");
+        taskBox.className = item.done ? "task done" : "task";
+        taskBox.innerHTML = `
+            <span class="icon">${item.done ? "✔️" : "⚪"}</span>
+            <span class="text">${item.task}</span>
+            <button class="delete">❌</button>
+        `;
+        taskBox.querySelector(".icon").addEventListener("click", () => {
+            dataStorage[i].done = !dataStorage[i].done;
+            commitData();
+            updateView();
+        });
+        taskBox.querySelector(".delete").onclick = (e) => {
+            e.stopPropagation();
+            dataStorage.splice(i, 1);
+            commitData();
+            updateView();
+        };
+        listContainer.appendChild(taskBox);
+    }
+}
+function handleAdd() {
+    const content = inputField.value.trim();
+
+    if (content !== "") {
+        dataStorage.push({
+            task: content,
+            done: false
+        });
+        commitData();
+        updateView();
+        inputField.value = "";
+    }
+}
+updateView();
+</script>
+</body>
+</html>

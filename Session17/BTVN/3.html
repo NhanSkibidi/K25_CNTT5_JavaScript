@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+<body>
+     <div class="container">
+        <div class="header">
+            <h1>Chuẩn bị Tết Nguyên Đán</h1>
+            <p>Danh sách việc cần làm</p>
+        </div>
+        <div class="add-task">
+            <input id="newTask" placeholder="Thêm công việc mới..." />
+            <button onclick="addTask()">Thêm</button>
+        </div>
+        <div id="todoList"></div>
+        <div id="todoList" class="task-list"></div>
+        <div id="status" class="footer"></div>
+    </div>
+    <script>
+        const initialTasks = [
+    { task: "Mua bánh chưng", done: false },
+    { task: "Dọn nhà đón Tết", done: false },
+    { task: "Gói bánh chưng", done: false },
+    { task: "Trang trí nhà cửa bằng hoa mai, hoa đào", done: false },
+    { task: "Mua phong bao lì xì", done: false },
+    { task: "Chuẩn bị mâm ngũ quả", done: false }
+];
+const listElement = document.getElementById("todoList");
+const inputField = document.getElementById("newTask");
+let storageData = JSON.parse(localStorage.getItem("myTodos")) || initialTasks;
+const updateStorage = () => {
+    localStorage.setItem("myTodos", JSON.stringify(storageData));
+};
+const createNewTask = () => {
+    const content = inputField.value.trim();
+    if (content.length > 0) {
+        storageData.push({ task: content, done: false });
+        inputField.value = "";
+        updateStorage();
+        showTasks();
+    }
+};
+function showTasks() {
+    listElement.innerHTML = "";
+    storageData.map((item, id) => {
+        const taskBox = document.createElement("div");
+        taskBox.className = item.done ? "task done" : "task";
+
+        taskBox.innerHTML = `
+            <span class="icon">${item.done ? "✔️" : "⚪"}</span>
+            <span class="text">${item.task}</span>
+        `;
+        taskBox.addEventListener("click", function() {
+            storageData[id].done = !storageData[id].done;
+            updateStorage();
+            showTasks();
+        });
+
+        listElement.appendChild(taskBox);
+    });
+}
+showTasks();
+    </script>
+</body>
+
+</html>
