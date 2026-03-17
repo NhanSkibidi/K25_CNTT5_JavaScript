@@ -18,7 +18,7 @@ const btnCheckout = document.getElementById("btn-checkout");
 function saveToStorage() {
     localStorage.setItem('tet_products', JSON.stringify(products));
 }
-// 4. Hàm Render Sản phẩm (Phong cách Full DOM)
+// 4. Hàm Render Sản phẩm
 function renderProduct() {
     productListContainer.innerHTML = ""; // Xóa nội dung cũ
     products.forEach((product, index) => {
